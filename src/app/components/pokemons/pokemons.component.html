@@ -1,18 +1,42 @@
 <div class="container">
-  <h2>Les six premiers pokemons : </h2>
-  <hr>
+  <h2>Les six premiers pokemons :</h2>
+  <hr />
+  <p>{{ count }} dans la base de données :</p>
   <div class="columns">
+    <div class="column is-two-third">
+      <div class="field has-addons">
+        <div class="control has-icons-left">
+          <form>
+            <input
+              type="text"
+              name="pokemonSearche"
+              placeholder="Nom du Pokemon"
+              [(ngModel)]="formSearchPokemon.nom"
+              class="input is-small"
+            />
+            <a
+              (click)="rechercher(formSearchPokemon.nom)"
+              class="button is-primary is-small"
+              >Rechercher</a
+            >
+            <a (click)="annuler()" class="button is-danger is-small">Annuler</a>
+          </form>
+        </div>
+      </div>
+    </div>
     <div class="column">
       <p>Dans l'ordre du Pokédex :</p>
-      <p *ngIf="select"> Le pokémon selectionné est : {{select.taille}}</p>
+      <p *ngIf="select">Le pokémon selectionné est : {{ select.nom }}</p>
     </div>
   </div>
   <div class="columns is-multiline">
     <ul class="menu-list column is-one-third" *ngFor="let pokemon of pokemons">
-     <li>
-       <app-pokemon [pokemon]="pokemon" (select)='select=$event'></app-pokemon>
-     </li>
+      <li>
+        <app-pokemon
+          [pokemon]="pokemon"
+          (select)="select = $event"
+        ></app-pokemon>
+      </li>
     </ul>
   </div>
 </div>
-
