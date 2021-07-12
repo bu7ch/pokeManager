@@ -1,0 +1,18 @@
+<div class="container">
+  <h2>Les six premiers pokemons : </h2>
+  <hr>
+  <div class="columns">
+    <div class="column">
+      <p>Dans l'ordre du Pokédex :</p>
+      <p *ngIf="select"> Le pokémon selectionné est : {{select.taille}}</p>
+    </div>
+  </div>
+  <div class="columns is-multiline">
+    <ul class="menu-list column is-one-third" *ngFor="let pokemon of pokemons">
+     <li>
+       <app-pokemon [pokemon]="pokemon" (select)='select=$event'></app-pokemon>
+     </li>
+    </ul>
+  </div>
+</div>
+
