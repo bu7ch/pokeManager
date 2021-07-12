@@ -4,29 +4,41 @@
   <p>{{ count }} dans la base de données :</p>
   <div class="columns">
     <div class="column is-two-third">
-      <div class="field has-addons">
-        <div class="control has-icons-left">
-          <form>
+      <form #form="ngForm">
+        <div class="field has-addons">
+          <div class="control has-icons-left">
             <input
               type="text"
               name="pokemonSearche"
               placeholder="Nom du Pokemon"
               [(ngModel)]="formSearchPokemon.nom"
               class="input is-small"
+              pattern="[a-zA-Z]*"
+              [class.is-danger]="form.invalid"
             />
             <span class="icon is-small is-left">
               <fa-icon [icon]="faOptinMonster"></fa-icon>
             </span>
+            <div *ngIf="form.invalid" class="tag is-danger is-light">
+              Le champ de saisie ne peut contenir que des lettres.
+            </div>
+          </div>
             <a
               (click)="rechercher(formSearchPokemon.nom)"
               class="button is-primary is-small"
-              >Rechercher</a
-            >
-            <a (click)="annuler()" class="button is-danger is-small">Annuler</a>
-          </form>
+              [class.is-danger]="form.invalid"
+              >Rechercher
+              </a>
+            <div class="control">
+              <a (click)="annuler()" class="button is-danger is-small">
+                Annuler
+              </a>
+            </div>
+          
         </div>
-      </div>
+      </form>
     </div>
+  </div>
     <div class="column">
       <p>Dans l'ordre du Pokédex :</p>
       <p *ngIf="select">Le pokémon selectionné est : {{ select.nom }}</p>
@@ -42,4 +54,4 @@
       </li>
     </ul>
   </div>
-</div>
+
