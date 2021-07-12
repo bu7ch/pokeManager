@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { faOptinMonster } from '@fortawesome/free-brands-svg-icons';
 import { FormSearchPokemon } from 'src/app/models/form-search-pokemon';
 import { PokemonsService } from 'src/app/services/pokemons.service';
-
 
 @Component({
   selector: 'app-pokemons',
@@ -13,6 +13,7 @@ export class PokemonsComponent implements OnInit {
   pokemons:any;
   count = 0;
   formSearchPokemon = new FormSearchPokemon('');
+  faOptinMonster =faOptinMonster;
   
   constructor(private servicePokemons: PokemonsService) {}
 

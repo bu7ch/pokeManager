@@ -14,6 +14,9 @@
               [(ngModel)]="formSearchPokemon.nom"
               class="input is-small"
             />
+            <span class="icon is-small is-left">
+              <fa-icon [icon]="faOptinMonster"></fa-icon>
+            </span>
             <a
               (click)="rechercher(formSearchPokemon.nom)"
               class="button is-primary is-small"
