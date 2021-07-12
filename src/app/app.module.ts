@@ -12,6 +12,9 @@ import localeFR from '@angular/common/locales/fr';
 import { PokemonComponent } from './components/pokemon/pokemon.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HeaderComponent } from './components/header/header.component';
+import { CreationComponent } from './components/compte/creation/creation.component';
+import { ConnexionComponent } from './components/compte/connexion/connexion.component';
 
 
 registerLocaleData(localeFR);
@@ -21,7 +24,10 @@ registerLocaleData(localeFR);
     AppComponent,
     GenerationsComponent,
     PokemonsComponent,
-    PokemonComponent
+    PokemonComponent,
+    HeaderComponent,
+    CreationComponent,
+    ConnexionComponent
   ],
   imports: [
     BrowserModule,
