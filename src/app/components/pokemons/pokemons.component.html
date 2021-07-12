@@ -1,18 +1,55 @@
 <div class="container">
-  <h2>Les six premiers pokemons : </h2>
-  <hr>
+  <h2>Les six premiers pokemons :</h2>
+  <hr />
+  <p>{{ count }} dans la base de données :</p>
   <div class="columns">
-    <div class="column">
-      <p>Dans l'ordre du Pokédex :</p>
-      <p *ngIf="select"> Le pokémon selectionné est : {{select.taille}}</p>
+    <div class="column is-two-third">
+      <form #form="ngForm">
+        <div class="field has-addons">
+          <div class="control has-icons-left">
+            <input
+              type="text"
+              name="pokemonSearche"
+              placeholder="Nom du Pokemon"
+              [(ngModel)]="formSearchPokemon.nom"
+              class="input is-small"
+              pattern="[a-zA-Z 3]*"
+              [class.is-danger]="form.invalid"
+            />
+            <span class="icon is-small is-left">
+              <fa-icon [icon]="faOptinMonster"></fa-icon>
+            </span>
+            <div *ngIf="form.invalid" class="tag is-danger is-light">
+              Le champ de saisie ne peut contenir que des lettres.
+            </div>
+            <div *ngIf="easterEggs">
+              <img src="https://media.giphy.com/media/3o7bu1nVSxNQUWMAZa/giphy.gif" alt="">
+            </div>
+          </div>
+          <a
+            (click)="rechercher(formSearchPokemon.nom)"
+            class="button is-primary is-small"
+            [class.is-danger]="form.invalid"
+            >Rechercher
+          </a>
+          <div class="control">
+            <a (click)="annuler()" class="button is-danger is-small">
+              Annuler
+            </a>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="columns is-multiline">
-    <ul class="menu-list column is-one-third" *ngFor="let pokemon of pokemons">
-     <li>
-       <app-pokemon [pokemon]="pokemon" (select)='select=$event'></app-pokemon>
-     </li>
-    </ul>
+  <div class="column">
+    <p>Dans l'ordre du Pokédex :</p>
+    <p *ngIf="select">Le pokémon selectionné est : {{ select.nom }}</p>
   </div>
 </div>
-
+<div class="columns is-multiline">
+  <ul class="menu-list column is-one-third" *ngFor="let pokemon of pokemons">
+    <li>
+      <app-pokemon [pokemon]="pokemon" (select)="select = $event"></app-pokemon>
+    </li>
+  </ul>
+</div>
