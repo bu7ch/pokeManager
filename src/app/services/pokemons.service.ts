@@ -16,8 +16,8 @@ getGenerations() {
   return this.http.get<GenerationAPI>(url)
 }
 
-  getPokemons() {
-    let url = 'https://pokeapi.co/api/v2/pokemon/'
+  getPokemons(limit: number, offset:number) {
+    let url = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`
     return this.http.get<PokemonsAPI>(url)
   }
   getPokemon(url:any) {
@@ -27,10 +27,6 @@ getGenerations() {
   // countPokemons() {
   //   return this.pokemons.length;
   // }
-
-  // rechercherPokemon(nomDuPokemon:string){
-  //   let regex = new RegExp(nomDuPokemon, 'gi');
-  //   return this.pokemons.filter(pokemon => pokemon.nom.match(regex))
-  //   console.log()
-  // }
+  
 }
+
