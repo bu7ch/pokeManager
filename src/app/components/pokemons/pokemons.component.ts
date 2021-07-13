@@ -10,29 +10,42 @@ import { PokemonsService } from 'src/app/services/pokemons.service';
 })
 export class PokemonsComponent implements OnInit {
   select: any;
-  pokemons:any;
+  pokemons: any;
   count = 0;
+  limit = 25;
+  page = 1;
   formSearchPokemon = new FormSearchPokemon('');
-  faOptinMonster =faOptinMonster;
+  faOptinMonster = faOptinMonster;
   easterEggs = false;
-  
+
   constructor(private servicePokemons: PokemonsService) {}
 
   ngOnInit(): void {
-    this.pokemons = this.servicePokemons.getPokemons()
-    this.count = this.servicePokemons.countPokemons()
+    this.servicePokemons
+      .getPokemons(this.limit, this.page)
+      .subscribe((result) => {
+        this.pokemons = result.results;
+        this.count = result.count;
+      });
   }
-  rechercher(nomDuPokemon: any){
-    this.pokemons = this.servicePokemons.rechercherPokemon(nomDuPokemon)
+  rechercher(nomDuPokemon: any) {
+    const regex = new RegExp(nomDuPokemon, 'gi');
+    this.pokemons = this.servicePokemons
+      .getPokemons(this.limit, this.page)
+      .subscribe((res) => {
+        this.pokemons = res.results.filter((pokemon) =>
+          pokemon.name.match(regex)
+        );
+      });
     this.easterEggs = false;
-    if(nomDuPokemon === 'C3PO') {
-     this.easterEggs = true;
+    if (nomDuPokemon === 'C3PO') {
+      this.easterEggs = true;
     }
   }
-
   annuler(){
-    this.pokemons = this.servicePokemons.getPokemons()
+    this.pokemons = this.servicePokemons.getPokemons(this.limit, this.page).subscribe( res => {
+      this.pokemons = res.results
+    })
     this.formSearchPokemon.setNom('')
   }
-
 }

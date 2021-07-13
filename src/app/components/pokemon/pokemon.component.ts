@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PokemonAPI } from 'src/app/models/pokemon-api';
+import { PokemonsService } from 'src/app/services/pokemons.service';
 
 @Component({
   selector: 'app-pokemon',
@@ -6,14 +8,19 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   styleUrls: ['./pokemon.component.css']
 })
 export class PokemonComponent implements OnInit {
-@Input() pokemon: any
+@Input() pokemonInput: any
 @Output() select = new EventEmitter();
-  constructor() { }
+
+pokemon!: PokemonAPI
+  constructor(private servicePokemons: PokemonsService) { }
 
   ngOnInit(): void {
+    this.servicePokemons.getPokemon(this.pokemonInput['url']).subscribe(resultat => {
+      this.pokemon = resultat
+    })
   }
   clicSurImage(){
-    this.select.emit(this.pokemon)
+    this.select.emit(this.pokemonInput)
   }
 
 }

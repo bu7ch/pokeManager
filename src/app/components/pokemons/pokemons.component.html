@@ -26,16 +26,9 @@
               <img src="https://media.giphy.com/media/3o7bu1nVSxNQUWMAZa/giphy.gif" alt="">
             </div>
           </div>
-          <a
-            (click)="rechercher(formSearchPokemon.nom)"
-            class="button is-primary is-small"
-            [class.is-danger]="form.invalid"
-            >Rechercher
-          </a>
+          <a (click)="rechercher(formSearchPokemon.nom)" class="button is-primary is-small" [class.is-danger]="form.invalid">Rechercher</a>
           <div class="control">
-            <a (click)="annuler()" class="button is-danger is-small">
-              Annuler
-            </a>
+            <a (click)="annuler()" class="button is-danger is-small">Annuler</a> 
           </div>
         </div>
       </form>
@@ -49,7 +42,7 @@
 <div class="columns is-multiline">
   <ul class="menu-list column is-one-third" *ngFor="let pokemon of pokemons">
     <li>
-      <app-pokemon [pokemon]="pokemon" (select)="select = $event"></app-pokemon>
+      <app-pokemon [pokemonInput]="pokemon" (select)="select = $event"></app-pokemon>
     </li>
   </ul>
 </div>
